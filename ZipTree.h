@@ -7,6 +7,7 @@
 
 #include <cstdlib>
 #include <cstdio>
+#include "OrderedList.h"
 
 #define randomRank static_cast<unsigned int>(__builtin_clz(rand())) - 1
 
@@ -18,16 +19,16 @@ typedef struct ZipTreeNode {
     ZipTreeNode *right;
 } ZipTreeNode;
 
-class ZipTree {
+class ZipTree: public OrderedList {
 public:
-    void insert(long value);
+    void insert(long value) override;
     void insert(long value, unsigned int rank);
-    bool contains(long key);
-    bool remove(long key);
+    bool contains(long key) override;
+    bool remove(long key) override;
 
-    long* getOrderedList();
-    long getSize();
-    void print();
+    long* getOrderedList() override;
+    long getSize() override;
+    void print() override;
 private:
     ZipTreeNode *root;
     long size = 0;

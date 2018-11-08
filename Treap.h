@@ -7,6 +7,7 @@
 
 #include <cstdlib>
 #include <cstdio>
+#include "OrderedList.h"
 
 #define randomPriority static_cast<unsigned int>(rand())
 #define getExistingChild(x) (x->left == nullptr) ? x->right : x->left
@@ -19,16 +20,16 @@ typedef struct TreapNode {
     TreapNode *right;
 } TreapNode;
 
-class Treap {
+class Treap: public OrderedList {
 public:
-    void insert(long value);
+    void insert(long value) override;
     void insert(long value, unsigned int priority);
-    bool contains(long key);
-    bool remove(long key);
+    bool contains(long key) override;
+    bool remove(long key) override;
 
-    long* getOrderedList();
-    long getSize();
-    void print();
+    long* getOrderedList() override;
+    long getSize() override;
+    void print() override;
 private:
     TreapNode *root;
     long size;

@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <limits>
+#include "OrderedList.h"
 
 #define SKIP_LIST_MAX_HEIGHT 32
 #define CURRENT_HEIGHT (32 - __builtin_clz(size + 1))
@@ -21,18 +22,18 @@ typedef struct SkipListNode {
     SkipListNode **next; // array of pointers
 } SkipListNode;
 
-class SkipList {
+class SkipList: public OrderedList {
 public:
     SkipList();
 
-    void insert(long value);
+    void insert(long value) override;
     void insert(long value, unsigned int height);
-    bool contains(long key);
-    bool remove(long key);
+    bool contains(long key) override;
+    bool remove(long key) override;
 
-    long* getOrderedList();
-    long getSize();
-    void print();
+    long* getOrderedList() override;
+    long getSize() override;
+    void print() override;
 private:
     SkipListNode *head;
     long size = 0;
