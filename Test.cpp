@@ -29,7 +29,7 @@ int main() {
         insertZigzag(testDataStructure, limit);
     } else if (testType == 3) {
         containsRandom(testDataStructure, limit);
-    } else if (testType == 3) {
+    } else if (testType == 4) {
         containsRandom10Times(testDataStructure, limit);
     }
 }
