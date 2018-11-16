@@ -5,6 +5,7 @@
 #ifndef ZIPTREES_ZIPTREE_H
 #define ZIPTREES_ZIPTREE_H
 
+#include <stdint.h>
 #include <cstdint>
 
 #include <cstdlib>
