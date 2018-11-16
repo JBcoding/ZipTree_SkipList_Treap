@@ -8,7 +8,7 @@ void ZipTree::insert(long value) {
     insert(value, randomRank);
 }
 
-void ZipTree::insert(long value, unsigned int rank) {
+void ZipTree::insert(long value, uint8_t rank) {
     auto *x = (ZipTreeNode*)malloc(sizeof(ZipTreeNode));
     x->key = value;
     x->rank = rank;

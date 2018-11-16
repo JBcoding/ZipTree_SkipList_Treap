@@ -5,15 +5,17 @@
 #ifndef ZIPTREES_ZIPTREE_H
 #define ZIPTREES_ZIPTREE_H
 
+#include <cstdint>
+
 #include <cstdlib>
 #include <cstdio>
 #include "OrderedList.h"
 
-#define randomRank static_cast<unsigned int>(__builtin_clz(rand())) - 1
+#define randomRank static_cast<uint8_t>(__builtin_clz(rand())) - 1
 
 typedef struct ZipTreeNode {
     long key;
-    unsigned int rank;
+    uint8_t rank;
 
     ZipTreeNode *left;
     ZipTreeNode *right;
@@ -22,7 +24,7 @@ typedef struct ZipTreeNode {
 class ZipTree: public OrderedList {
 public:
     void insert(long value) override;
-    void insert(long value, unsigned int rank);
+    void insert(long value, uint8_t rank);
     bool contains(long key) override;
     bool remove(long key) override;
 

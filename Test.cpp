@@ -14,7 +14,7 @@
 void insertMonotonicallyIncreasing(long type, long limit);
 void insertZigzag(long type, long limit);
 void containsRandom(long type, long limit);
-void containsRandom10Times(long type, long limit);
+void containsSkewed(long type, long limit);
 
 int main() {
     srand(0x2A); rand(); rand(); rand(); // to get it going :)
@@ -23,14 +23,19 @@ int main() {
     long testType, testDataStructure, limit;
     scanf("%ld %ld %ld", &testType, &testDataStructure, &limit);
 
-    if (testType == 1) {
-        insertMonotonicallyIncreasing(testDataStructure, limit);
-    } else if (testType == 2) {
-        insertZigzag(testDataStructure, limit);
-    } else if (testType == 3) {
-        containsRandom(testDataStructure, limit);
-    } else if (testType == 4) {
-        containsRandom10Times(testDataStructure, limit);
+    switch (testType) {
+        case 1:
+            insertMonotonicallyIncreasing(testDataStructure, limit);
+            break;
+        case 2:
+            insertZigzag(testDataStructure, limit);
+            break;
+        case 3:
+            containsRandom(testDataStructure, limit);
+            break;
+        case 4:
+            containsSkewed(testDataStructure, limit);
+            break;
     }
 }
 
@@ -91,7 +96,7 @@ void containsRandom(long type, long limit) {
     }
 }
 
-void containsRandom10Times(long type, long limit) {
+void containsSkewed(long type, long limit) {
     OrderedList *list = getStructure(type);
 
     long *container = (long*)malloc(sizeof(long) * limit);
@@ -102,9 +107,7 @@ void containsRandom10Times(long type, long limit) {
 
     shuffle(container, limit);
 
-    for (int j = 0; j < 10; j ++) {
-        for (long i = 0; i < limit; i++) {
-            list->contains(container[i]);
-        }
+    for (long i = 0; i < limit; i ++) {
+        list->contains(limit / container[i]);
     }
 }
