@@ -19,7 +19,7 @@ void Treap::insert(long value, unsigned int priority) {
 
 TreapNode* Treap::insert(TreapNode *x, TreapNode *node) {
     if (node == nullptr) { return x;}
-    if (compareKey(x->key, node->key) == -1) {
+    if (compareKey(x->key, node->key) < 0) {
         node->left = insert(x, node->left);
         if (node->priority < node->left->priority) {
             // right tree rotation
@@ -48,7 +48,7 @@ bool Treap::contains(long key) {
 TreapNode *Treap::find(long key, TreapNode *node) {
     if (node == nullptr) { return nullptr;}
     if (compareKey(node->key, key) == 0) { return node;}
-    if (compareKey(key, node->key) == -1) { return find(key, node->left);}
+    if (compareKey(key, node->key) < 0) { return find(key, node->left);}
     else { return find(key, node->right);}
 }
 
@@ -72,7 +72,7 @@ TreapNode *Treap::remove(TreapNode *x, TreapNode *node) {
 }
 
 TreapNode *Treap::removeLeaf(TreapNode *x, TreapNode *node) {
-    if (compareKey(x->key, node->key) == -1) {
+    if (compareKey(x->key, node->key) < 0) {
         if (node->left == x) {
             node->left = nullptr;
             return node;
@@ -91,7 +91,7 @@ TreapNode *Treap::removeLeaf(TreapNode *x, TreapNode *node) {
 }
 
 TreapNode *Treap::removeUnaryNode(TreapNode *x, TreapNode *node) {
-    if (compareKey(x->key, node->key) == -1) {
+    if (compareKey(x->key, node->key) < 0) {
         if (node->left == x) {
             node->left = getExistingChild(x);
             return node;
@@ -116,7 +116,7 @@ TreapNode *Treap::removeBinaryNode(TreapNode *x, TreapNode *node) {
         successor->left = x->left;
         successor->right = x->right;
         return successor;
-    } else if (compareKey(x->key, node->key) == -1) {
+    } else if (compareKey(x->key, node->key) < 0) {
         node->left = removeBinaryNode(x, node->left);
         if (node->priority < node->left->priority) {
             // right tree rotation
