@@ -9,35 +9,11 @@
 #include "SkipList.h"
 #include "Treap.h"
 
+#ifdef wordsAsNumbers // enable by compiling with "-D wordsAsNumbers"
+#include "LargeConstants/WordsAsNumbers.h"
+#endif
+
 #define swap(l, i, j) if (i != j) {l[i] = l[i] ^ l[j]; l[j] = l[j] ^ l[i]; l[i] = l[i] ^ l[j];}
-
-void insertMonotonicallyIncreasing(long type, long limit);
-void insertZigzag(long type, long limit);
-void containsRandom(long type, long limit);
-void containsSkewed(long type, long limit);
-
-int main() {
-    srand(0x2A); rand(); rand(); rand(); // to get it going :)
-
-
-    long testType, testDataStructure, limit;
-    scanf("%ld %ld %ld", &testType, &testDataStructure, &limit);
-
-    switch (testType) {
-        case 1:
-            insertMonotonicallyIncreasing(testDataStructure, limit);
-            break;
-        case 2:
-            insertZigzag(testDataStructure, limit);
-            break;
-        case 3:
-            containsRandom(testDataStructure, limit);
-            break;
-        case 4:
-            containsSkewed(testDataStructure, limit);
-            break;
-    }
-}
 
 // Helper functions
 
@@ -80,6 +56,16 @@ void insertZigzag(long type, long limit) {
     }
 }
 
+#ifdef wordsAsNumbers
+void insertWordsAsNumbers(long type, long limit) {
+    OrderedList *list = getStructure(type);
+
+    for (long i = 0; i < limit; i ++) {
+        list->insert(wordsAsNumbersArray[i % lengthOfWordsAsNumbersArray]);
+    }
+}
+#endif
+
 void containsRandom(long type, long limit) {
     OrderedList *list = getStructure(type);
 
@@ -109,5 +95,59 @@ void containsSkewed(long type, long limit) {
 
     for (long i = 0; i < limit; i ++) {
         list->contains(limit / container[i]);
+    }
+}
+
+#ifdef wordsAsNumbers
+void containsWordsAsNumbers(long type, long limit) {
+    OrderedList *list = getStructure(type);
+
+    long *container = (long*)malloc(sizeof(long) * limit);
+    for (long i = 0; i < limit; i ++) {
+        container[i] = i;
+        list->insert(wordsAsNumbersArray[i % lengthOfWordsAsNumbersArray]);
+    }
+
+    shuffle(container, limit);
+
+    for (long i = 0; i < limit; i ++) {
+        list->contains(container[i % lengthOfWordsAsNumbersArray]);
+    }
+}
+#endif
+
+
+int main() {
+    srand(0x2A); rand(); rand(); rand(); // to get it going :)
+
+
+    long testType, testDataStructure, limit;
+    scanf("%ld %ld %ld", &testType, &testDataStructure, &limit);
+
+    switch (testType) {
+        case 1:
+            insertMonotonicallyIncreasing(testDataStructure, limit);
+            break;
+        case 2:
+            insertZigzag(testDataStructure, limit);
+            break;
+#ifdef wordsAsNumbers
+        case 3:
+            insertWordsAsNumbers(testDataStructure, limit);
+            break;
+#endif
+        case 4:
+            containsRandom(testDataStructure, limit);
+            break;
+        case 5:
+            containsSkewed(testDataStructure, limit);
+            break;
+#ifdef wordsAsNumbers
+        case 6:
+            containsWordsAsNumbers(testDataStructure, limit);
+            break;
+#endif
+        default:
+            printf("Test not found, make sure you have compiled with the correct flags");
     }
 }
