@@ -28,7 +28,7 @@ void SkipList::insert(long value, unsigned int height) {
 }
 
 void SkipList::insert(SkipListNode *x, SkipListNode *node, unsigned int currentHeight) {
-    if (node->next[currentHeight] == nullptr || node->next[currentHeight]->key > x->key) {
+    if (node->next[currentHeight] == nullptr || compareKey(node->next[currentHeight]->key, x->key) == 1) {
         if (currentHeight == 0) {
             // insert here
             x->next[0] = node->next[0];
@@ -53,9 +53,9 @@ bool SkipList::contains(long key) {
 
 SkipListNode *SkipList::find(long key, SkipListNode *node, int currentHeight) {
     if (currentHeight < 0) { return nullptr;}
-    if (node->key == key) { return node;}
+    if (compareKey(node->key, key) == 0) { return node;}
     if (node->next[currentHeight] == nullptr
-    || node->next[currentHeight]->key > key) { return find(key, node, currentHeight - 1);}
+    || compareKey(node->next[currentHeight]->key, key) == 1) { return find(key, node, currentHeight - 1);}
     else { return find(key, node->next[currentHeight], currentHeight);}
 }
 
@@ -69,11 +69,11 @@ bool SkipList::remove(long key) {
 }
 
 void SkipList::remove(SkipListNode *x, SkipListNode *node, int currentHeight) {
-    if (currentHeight < 0 || node->key > x->key) { return;}
+    if (currentHeight < 0 || compareKey(node->key, x->key) == 1) { return;}
     if (node->next[currentHeight] == x) {
         node->next[currentHeight] = x->next[currentHeight];
         remove(x, node, currentHeight - 1);
-    } else if (node->next[currentHeight] == nullptr || node->next[currentHeight]->key > x->key) {
+    } else if (node->next[currentHeight] == nullptr || compareKey(node->next[currentHeight]->key, x->key) == 1) {
         remove(x, node, currentHeight - 1);
     } else {
         remove(x, node->next[currentHeight], currentHeight);

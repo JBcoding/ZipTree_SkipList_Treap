@@ -21,7 +21,7 @@ ZipTreeNode *ZipTree::insert(ZipTreeNode *x, ZipTreeNode *node) {
     if (node == nullptr) {
         node = x;
     } else {
-        if (x->key < node->key) {
+        if (compareKey(x->key, node->key) == -1) {
             if (insert(x, node->left) == x) {
                 if (x->rank < node->rank) {
                     node->left = x;
@@ -52,8 +52,8 @@ bool ZipTree::contains(long key) {
 
 ZipTreeNode *ZipTree::find(long key, ZipTreeNode *node) {
     if (node == nullptr) { return nullptr;}
-    if (node->key == key) { return node;}
-    if (node->key > key) { return find(key, node->left);}
+    if (compareKey(node->key, key) == 0) { return node;}
+    if (compareKey(node->key, key) == 1) { return find(key, node->left);}
     else { return find(key, node->right);}
 }
 
@@ -70,14 +70,14 @@ ZipTreeNode * ZipTree::remove(ZipTreeNode *x, ZipTreeNode *node) {
     if (x == node) {
         return zip(node->left, node->right);
     } else {
-        if (x->key < node->key) {
-            if (x->key == node->left->key) {
+        if (compareKey(x->key, node->key) == -1) {
+            if (compareKey(x->key, node->left->key) == 0) {
                 node->left = zip(node->left->left, node->left->right);
             } else {
                 remove(x, node->left);
             }
         } else {
-            if (x->key == node->right->key) {
+            if (compareKey(x->key, node->right->key) == 0) {
                 node->right = zip(node->right->left, node->right->right);
             } else {
                 remove(x, node->right);

@@ -5,6 +5,7 @@
 #ifndef ZIPTREES_ORDEREDLIST_H
 #define ZIPTREES_ORDEREDLIST_H
 
+#define compareKey(k1, k2) (k1 > k2) - (k1 < k2)
 
 class OrderedList {
 public:
