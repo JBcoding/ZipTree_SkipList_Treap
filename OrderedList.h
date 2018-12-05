@@ -15,8 +15,8 @@
 #define NODE_KEY long
 #define NODE_KEY_FORMAT_SPECIFIER "%li"
 #define SMALLEST_KEY_VALUE std::numeric_limits<long>::min()
-#define EXTRA_VARIABLES void;
-#define FINAL_PRINT void;
+#define EXTRA_VARIABLES ;
+#define FINAL_PRINT ;
 #define COMPARE_KEY(k1, k2) (k1 > k2) - (k1 < k2)
 #define IMPORT_WORDS_AS_NUMBERS
 #define LONG_TESTS
@@ -24,8 +24,8 @@
 #define NODE_KEY const char *
 #define NODE_KEY_FORMAT_SPECIFIER "%s"
 #define SMALLEST_KEY_VALUE ""
-#define EXTRA_VARIABLES void;
-#define FINAL_PRINT void;
+#define EXTRA_VARIABLES ;
+#define FINAL_PRINT ;
 #define COMPARE_KEY(k1, k2) strcmp(k1, k2)
 #define IMPORT_WORDS
 #define STRING_TESTS
