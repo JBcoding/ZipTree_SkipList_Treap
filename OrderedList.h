@@ -7,52 +7,52 @@
 
 #include <cstring>
 
-#define comparatorLong 1
-#define comparatorString 2
-#define comparatorLongCount 3
+#define COMPARATOR_LONG 1
+#define COMPARATOR_STRING 2
+#define COMPARATOR_LONG_COUNT 3
 
-#if comparator == comparatorLong
-#define nodeKey long
-#define nodeKeyFormatSpecifier "%li"
-#define smallestKeyValue std::numeric_limits<long>::min()
-#define extraVariables void;
-#define finalPrint void;
-#define compareKey(k1, k2) (k1 > k2) - (k1 < k2)
-#define importWordsAsNumbers
-#define longTests
-#elif comparator == comparatorString
-#define nodeKey const char *
-#define nodeKeyFormatSpecifier "%s"
-#define smallestKeyValue ""
-#define extraVariables void;
-#define finalPrint void;
-#define compareKey(k1, k2) strcmp(k1, k2)
-#define importWords
-#define stringTests
-#elif comparator == comparatorLongCount
-#define nodeKey long
-#define nodeKeyFormatSpecifier "%li"
-#define smallestKeyValue std::numeric_limits<long>::min()
-#define extraVariables long comparisonsCounter = 0;
-#define finalPrint printf("%li\n", list->comparisonsCounter);
-#define compareKey(k1, k2) (k1 > k2) - (k1 < k2) + (++ comparisonsCounter - comparisonsCounter)
-#define importWordsAsNumbers
-#define longTests
+#if COMPARATOR == COMPARATOR_LONG
+#define NODE_KEY long
+#define NODE_KEY_FORMAT_SPECIFIER "%li"
+#define SMALLEST_KEY_VALUE std::numeric_limits<long>::min()
+#define EXTRA_VARIABLES void;
+#define FINAL_PRINT void;
+#define COMPARE_KEY(k1, k2) (k1 > k2) - (k1 < k2)
+#define IMPORT_WORDS_AS_NUMBERS
+#define LONG_TESTS
+#elif COMPARATOR == COMPARATOR_STRING
+#define NODE_KEY const char *
+#define NODE_KEY_FORMAT_SPECIFIER "%s"
+#define SMALLEST_KEY_VALUE ""
+#define EXTRA_VARIABLES void;
+#define FINAL_PRINT void;
+#define COMPARE_KEY(k1, k2) strcmp(k1, k2)
+#define IMPORT_WORDS
+#define STRING_TESTS
+#elif COMPARATOR == COMPARATOR_LONG_COUNT
+#define NODE_KEY long
+#define NODE_KEY_FORMAT_SPECIFIER "%li"
+#define SMALLEST_KEY_VALUE std::numeric_limits<long>::min()
+#define EXTRA_VARIABLES long comparisonsCounter = 0;
+#define FINAL_PRINT printf("%li\n", list->comparisonsCounter);
+#define COMPARE_KEY(k1, k2) (k1 > k2) - (k1 < k2) + (++ comparisonsCounter - comparisonsCounter)
+#define IMPORT_WORDS_AS_NUMBERS
+#define LONG_TESTS
 #endif
 
 
 
 class OrderedList {
 public:
-    virtual void insert(nodeKey value) = 0;
-    virtual bool contains(nodeKey key) = 0;
-    virtual bool remove(nodeKey key) = 0;
+    virtual void insert(NODE_KEY value) = 0;
+    virtual bool contains(NODE_KEY key) = 0;
+    virtual bool remove(NODE_KEY key) = 0;
 
-    virtual nodeKey* getOrderedList() = 0;
+    virtual NODE_KEY* getOrderedList() = 0;
     virtual long getSize() = 0;
     virtual void print() = 0;
 
-    extraVariables
+    EXTRA_VARIABLES
 };
 
 

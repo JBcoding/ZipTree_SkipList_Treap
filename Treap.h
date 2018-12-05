@@ -13,7 +13,7 @@
 #define getExistingChild(x) (x->left == nullptr) ? x->right : x->left
 
 typedef struct TreapNode {
-    nodeKey key;
+    NODE_KEY key;
     unsigned int priority;
 
     TreapNode *left;
@@ -22,12 +22,12 @@ typedef struct TreapNode {
 
 class Treap: public OrderedList {
 public:
-    void insert(nodeKey value) override;
-    void insert(nodeKey value, unsigned int priority);
-    bool contains(nodeKey key) override;
-    bool remove(nodeKey key) override;
+    void insert(NODE_KEY value) override;
+    void insert(NODE_KEY value, unsigned int priority);
+    bool contains(NODE_KEY key) override;
+    bool remove(NODE_KEY key) override;
 
-    nodeKey* getOrderedList() override;
+    NODE_KEY* getOrderedList() override;
     long getSize() override;
     void print() override;
 private:
@@ -41,8 +41,8 @@ private:
     TreapNode* removeBinaryNode(TreapNode *x, TreapNode *node);
     TreapNode* successorOfNodeWithARightChild(TreapNode *x);
 
-    unsigned long getOrderedList(TreapNode *node, nodeKey* list, unsigned long index);
-    TreapNode* find(nodeKey key, TreapNode *node);
+    unsigned long getOrderedList(TreapNode *node, NODE_KEY* list, unsigned long index);
+    TreapNode* find(NODE_KEY key, TreapNode *node);
     void print(TreapNode *node, int depth);
 };
 

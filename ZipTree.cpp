@@ -4,11 +4,11 @@
 
 #include "ZipTree.h"
 
-void ZipTree::insert(nodeKey value) {
+void ZipTree::insert(NODE_KEY value) {
     insert(value, randomRank);
 }
 
-void ZipTree::insert(nodeKey value, uint8_t rank) {
+void ZipTree::insert(NODE_KEY value, uint8_t rank) {
     auto *x = (ZipTreeNode*)malloc(sizeof(ZipTreeNode));
     x->key = value;
     x->rank = rank;
@@ -21,7 +21,7 @@ ZipTreeNode *ZipTree::insert(ZipTreeNode *x, ZipTreeNode *node) {
     if (node == nullptr) {
         node = x;
     } else {
-        if (compareKey(x->key, node->key) < 0) {
+        if (COMPARE_KEY(x->key, node->key) < 0) {
             if (insert(x, node->left) == x) {
                 if (x->rank < node->rank) {
                     node->left = x;
@@ -46,18 +46,18 @@ ZipTreeNode *ZipTree::insert(ZipTreeNode *x, ZipTreeNode *node) {
     return node;
 }
 
-bool ZipTree::contains(nodeKey key) {
+bool ZipTree::contains(NODE_KEY key) {
     return find(key, root) != nullptr;
 }
 
-ZipTreeNode *ZipTree::find(nodeKey key, ZipTreeNode *node) {
+ZipTreeNode *ZipTree::find(NODE_KEY key, ZipTreeNode *node) {
     if (node == nullptr) { return nullptr;}
-    if (compareKey(node->key, key) == 0) { return node;}
-    if (compareKey(node->key, key) > 0) { return find(key, node->left);}
+    if (COMPARE_KEY(node->key, key) == 0) { return node;}
+    if (COMPARE_KEY(node->key, key) > 0) { return find(key, node->left);}
     else { return find(key, node->right);}
 }
 
-bool ZipTree::remove(nodeKey key) {
+bool ZipTree::remove(NODE_KEY key) {
     ZipTreeNode *x = find(key, root);
     if (x == nullptr) { return false;}
     root = remove(x, root);
@@ -70,14 +70,14 @@ ZipTreeNode * ZipTree::remove(ZipTreeNode *x, ZipTreeNode *node) {
     if (x == node) {
         return zip(node->left, node->right);
     } else {
-        if (compareKey(x->key, node->key) < 0) {
-            if (compareKey(x->key, node->left->key) == 0) {
+        if (COMPARE_KEY(x->key, node->key) < 0) {
+            if (COMPARE_KEY(x->key, node->left->key) == 0) {
                 node->left = zip(node->left->left, node->left->right);
             } else {
                 remove(x, node->left);
             }
         } else {
-            if (compareKey(x->key, node->right->key) == 0) {
+            if (COMPARE_KEY(x->key, node->right->key) == 0) {
                 node->right = zip(node->right->left, node->right->right);
             } else {
                 remove(x, node->right);
@@ -101,13 +101,13 @@ ZipTreeNode *ZipTree::zip(ZipTreeNode *x, ZipTreeNode *y) {
 
 
 
-nodeKey *ZipTree::getOrderedList() {
-    nodeKey *list = (nodeKey *)malloc(sizeof(nodeKey) * size);
+NODE_KEY *ZipTree::getOrderedList() {
+    NODE_KEY *list = (NODE_KEY *)malloc(sizeof(NODE_KEY) * size);
     getOrderedList(root, list, 0);
     return list;
 }
 
-unsigned long ZipTree::getOrderedList(ZipTreeNode *node, nodeKey *list, unsigned long index) {
+unsigned long ZipTree::getOrderedList(ZipTreeNode *node, NODE_KEY *list, unsigned long index) {
     if (node == nullptr) { return index;}
     index = getOrderedList(node->left, list, index);
     list[index++] = node->key;
@@ -133,7 +133,7 @@ void ZipTree::print(ZipTreeNode *node, int depth) {
         printf("NULL\n");
         return;
     }
-    printf("("); printf(nodeKeyFormatSpecifier, node->key); printf(", %i)\n", node->rank);
+    printf("("); printf(NODE_KEY_FORMAT_SPECIFIER, node->key); printf(", %i)\n", node->rank);
     print(node->left, depth + 1);
     print(node->right, depth + 1);
 }

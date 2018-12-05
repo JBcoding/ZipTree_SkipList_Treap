@@ -9,11 +9,11 @@
 #include "SkipList.h"
 #include "Treap.h"
 
-#ifdef importWordsAsNumbers // enable by compiling with "-D importWordsAsNumbers"
+#ifdef IMPORT_WORDS_AS_NUMBERS // enable by compiling with "-D IMPORT_WORDS_AS_NUMBERS"
 #include "LargeConstants/WordsAsNumbers.h"
 #endif
 
-#ifdef importWords // enable by compiling with "-D importWords"
+#ifdef IMPORT_WORDS // enable by compiling with "-D IMPORT_WORDS"
 #include "LargeConstants/Words.h"
 #endif
 
@@ -42,7 +42,7 @@ void shuffle(long *list, long size) {
 }
 
 // Tests
-#ifdef longTests
+#ifdef LONG_TESTS
 void insertMonotonicallyIncreasing(OrderedList *list, long limit) {
     for (long i = 0; i < limit; i ++) {
         list->insert(i);
@@ -64,7 +64,7 @@ void insertWordsAsNumbers(OrderedList *list, long limit) {
 }
 #endif
 
-#ifdef stringTests
+#ifdef STRING_TESTS
 void insertWords(OrderedList *list, long limit) {
     for (long i = 0; i < limit; i ++) {
         list->insert(wordsArray[i % lengthOfWordsArray]);
@@ -72,7 +72,7 @@ void insertWords(OrderedList *list, long limit) {
 }
 #endif
 
-#ifdef longTests
+#ifdef LONG_TESTS
 void containsRandom(OrderedList *list, long limit) {
     long *container = (long*)malloc(sizeof(long) * limit);
     for (long i = 0; i < limit; i ++) {
@@ -116,7 +116,7 @@ void containsWordsAsNumbers(OrderedList *list, long limit) {
 }
 #endif
 
-#ifdef stringTests
+#ifdef STRING_TESTS
 void containsWords(OrderedList *list, long limit) {
     long *container = (long*)malloc(sizeof(long) * limit);
     for (long i = 0; i < limit; i ++) {
@@ -142,7 +142,7 @@ int main() {
     OrderedList *list = getStructure(testDataStructure);
 
     switch (testType) {
-#ifdef longTests
+#ifdef LONG_TESTS
         case 1:
             insertMonotonicallyIncreasing(list, limit);
             break;
@@ -153,12 +153,12 @@ int main() {
             insertWordsAsNumbers(list, limit);
             break;
 #endif
-#ifdef stringTests
+#ifdef STRING_TESTS
         case 4:
             insertWords(list, limit);
             break;
 #endif
-#ifdef longTests
+#ifdef LONG_TESTS
         case 5:
             containsRandom(list, limit);
             break;
@@ -169,7 +169,7 @@ int main() {
             containsWordsAsNumbers(list, limit);
             break;
 #endif
-#ifdef stringTests
+#ifdef STRING_TESTS
         case 8:
             containsWords(list, limit);
             break;
@@ -178,5 +178,5 @@ int main() {
             printf("Test not found, make sure you have compiled with the correct flags");
     }
 
-    finalPrint
+    FINAL_PRINT
 }

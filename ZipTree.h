@@ -15,7 +15,7 @@
 #define randomRank static_cast<uint8_t>(__builtin_clz(rand())) - 1
 
 typedef struct ZipTreeNode {
-    nodeKey key;
+    NODE_KEY key;
     uint8_t rank;
 
     ZipTreeNode *left;
@@ -24,12 +24,12 @@ typedef struct ZipTreeNode {
 
 class ZipTree: public OrderedList {
 public:
-    void insert(nodeKey value) override;
-    void insert(nodeKey value, uint8_t rank);
-    bool contains(nodeKey key) override;
-    bool remove(nodeKey key) override;
+    void insert(NODE_KEY value) override;
+    void insert(NODE_KEY value, uint8_t rank);
+    bool contains(NODE_KEY key) override;
+    bool remove(NODE_KEY key) override;
 
-    nodeKey* getOrderedList() override;
+    NODE_KEY* getOrderedList() override;
     long getSize() override;
     void print() override;
 private:
@@ -37,11 +37,11 @@ private:
     long size = 0;
 
     ZipTreeNode* insert(ZipTreeNode *x, ZipTreeNode *node);
-    ZipTreeNode* find(nodeKey key, ZipTreeNode *node);
+    ZipTreeNode* find(NODE_KEY key, ZipTreeNode *node);
     ZipTreeNode* remove(ZipTreeNode *x, ZipTreeNode *node);
     ZipTreeNode* zip(ZipTreeNode *x, ZipTreeNode *y);
 
-    unsigned long getOrderedList(ZipTreeNode *node, nodeKey* list, unsigned long index);
+    unsigned long getOrderedList(ZipTreeNode *node, NODE_KEY* list, unsigned long index);
     void print(ZipTreeNode *node, int depth);
 };
 
