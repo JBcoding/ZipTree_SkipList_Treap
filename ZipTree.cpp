@@ -4,11 +4,11 @@
 
 #include "ZipTree.h"
 
-void ZipTree::insert(long value) {
+void ZipTree::insert(nodeKey value) {
     insert(value, randomRank);
 }
 
-void ZipTree::insert(long value, uint8_t rank) {
+void ZipTree::insert(nodeKey value, uint8_t rank) {
     auto *x = (ZipTreeNode*)malloc(sizeof(ZipTreeNode));
     x->key = value;
     x->rank = rank;
@@ -46,18 +46,18 @@ ZipTreeNode *ZipTree::insert(ZipTreeNode *x, ZipTreeNode *node) {
     return node;
 }
 
-bool ZipTree::contains(long key) {
+bool ZipTree::contains(nodeKey key) {
     return find(key, root) != nullptr;
 }
 
-ZipTreeNode *ZipTree::find(long key, ZipTreeNode *node) {
+ZipTreeNode *ZipTree::find(nodeKey key, ZipTreeNode *node) {
     if (node == nullptr) { return nullptr;}
     if (compareKey(node->key, key) == 0) { return node;}
     if (compareKey(node->key, key) > 0) { return find(key, node->left);}
     else { return find(key, node->right);}
 }
 
-bool ZipTree::remove(long key) {
+bool ZipTree::remove(nodeKey key) {
     ZipTreeNode *x = find(key, root);
     if (x == nullptr) { return false;}
     root = remove(x, root);
@@ -101,13 +101,13 @@ ZipTreeNode *ZipTree::zip(ZipTreeNode *x, ZipTreeNode *y) {
 
 
 
-long *ZipTree::getOrderedList() {
-    long *list = (long *)malloc(sizeof(long) * size);
+nodeKey *ZipTree::getOrderedList() {
+    nodeKey *list = (nodeKey *)malloc(sizeof(nodeKey) * size);
     getOrderedList(root, list, 0);
     return list;
 }
 
-unsigned long ZipTree::getOrderedList(ZipTreeNode *node, long *list, unsigned long index) {
+unsigned long ZipTree::getOrderedList(ZipTreeNode *node, nodeKey *list, unsigned long index) {
     if (node == nullptr) { return index;}
     index = getOrderedList(node->left, list, index);
     list[index++] = node->key;
@@ -133,7 +133,7 @@ void ZipTree::print(ZipTreeNode *node, int depth) {
         printf("NULL\n");
         return;
     }
-    printf("(%li, %i)\n", node->key, node->rank);
+    printf("("); printf(nodeKeyFormatSpecifier, node->key); printf(", %i)\n", node->rank);
     print(node->left, depth + 1);
     print(node->right, depth + 1);
 }

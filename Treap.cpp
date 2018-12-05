@@ -4,11 +4,11 @@
 
 #include "Treap.h"
 
-void Treap::insert(long value) {
+void Treap::insert(nodeKey value) {
     insert(value, randomPriority);
 }
 
-void Treap::insert(long value, unsigned int priority) {
+void Treap::insert(nodeKey value, unsigned int priority) {
     auto *x = (TreapNode*)malloc(sizeof(TreapNode));
     x->key = value;
     x->priority = priority;
@@ -41,18 +41,18 @@ TreapNode* Treap::insert(TreapNode *x, TreapNode *node) {
     return node;
 }
 
-bool Treap::contains(long key) {
+bool Treap::contains(nodeKey key) {
     return find(key, root) != nullptr;
 }
 
-TreapNode *Treap::find(long key, TreapNode *node) {
+TreapNode *Treap::find(nodeKey key, TreapNode *node) {
     if (node == nullptr) { return nullptr;}
     if (compareKey(node->key, key) == 0) { return node;}
     if (compareKey(key, node->key) < 0) { return find(key, node->left);}
     else { return find(key, node->right);}
 }
 
-bool Treap::remove(long key) {
+bool Treap::remove(nodeKey key) {
     TreapNode *x = find(key, root);
     if (x == nullptr) { return false;}
     root = remove(x, root);
@@ -146,13 +146,13 @@ TreapNode *Treap::successorOfNodeWithARightChild(TreapNode *x) {
 
 
 
-long *Treap::getOrderedList() {
-    long *list = (long *)malloc(sizeof(long) * size);
+nodeKey *Treap::getOrderedList() {
+    nodeKey *list = (nodeKey *)malloc(sizeof(nodeKey) * size);
     getOrderedList(root, list, 0);
     return list;
 }
 
-unsigned long Treap::getOrderedList(TreapNode *node, long *list, unsigned long index) {
+unsigned long Treap::getOrderedList(TreapNode *node, nodeKey *list, unsigned long index) {
     if (node == nullptr) { return index;}
     index = getOrderedList(node->left, list, index);
     list[index++] = node->key;
@@ -178,7 +178,7 @@ void Treap::print(TreapNode *node, int depth) {
         printf("NULL\n");
         return;
     }
-    printf("(%li, %i)\n", node->key, node->priority);
+    printf("("); printf(nodeKeyFormatSpecifier, node->key); printf(", %i)\n", node->priority);
     print(node->left, depth + 1);
     print(node->right, depth + 1);
 }

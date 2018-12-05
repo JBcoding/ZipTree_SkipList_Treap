@@ -16,7 +16,7 @@
 #define max(a, b) (a > b) ? a : b
 
 typedef struct SkipListNode {
-    long key;
+    nodeKey key;
     unsigned int height;
 
     SkipListNode **next; // array of pointers
@@ -26,12 +26,12 @@ class SkipList: public OrderedList {
 public:
     SkipList();
 
-    void insert(long value) override;
-    void insert(long value, unsigned int height);
-    bool contains(long key) override;
-    bool remove(long key) override;
+    void insert(nodeKey value) override;
+    void insert(nodeKey value, unsigned int height);
+    bool contains(nodeKey key) override;
+    bool remove(nodeKey key) override;
 
-    long* getOrderedList() override;
+    nodeKey* getOrderedList() override;
     long getSize() override;
     void print() override;
 private:
@@ -39,7 +39,7 @@ private:
     long size = 0;
 
     void insert(SkipListNode *x, SkipListNode *node, unsigned int currentHeight);
-    SkipListNode* find(long key, SkipListNode *node, int currentHeight);
+    SkipListNode* find(nodeKey key, SkipListNode *node, int currentHeight);
     void remove(SkipListNode *x, SkipListNode *node, int currentHeight);
 };
 

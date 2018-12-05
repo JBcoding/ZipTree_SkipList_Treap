@@ -8,17 +8,17 @@ SkipList::SkipList() {
     head = (SkipListNode*)malloc(sizeof(SkipListNode));
     head->next = (SkipListNode**)malloc(sizeof(SkipListNode*) * SKIP_LIST_MAX_HEIGHT);
     head->height = SKIP_LIST_MAX_HEIGHT;
-    head->key = std::numeric_limits<long>::min();
+    head->key = smallestKeyValue;
     for (int i = 0; i < SKIP_LIST_MAX_HEIGHT; ++i) {
         head->next[i] = nullptr;
     }
 }
 
-void SkipList::insert(long value) {
+void SkipList::insert(nodeKey value) {
     insert(value, randomHeight);
 }
 
-void SkipList::insert(long value, unsigned int height) {
+void SkipList::insert(nodeKey value, unsigned int height) {
     auto *x = (SkipListNode*)malloc(sizeof(SkipListNode));
     x->key = value;
     x->height = height;
@@ -47,11 +47,11 @@ void SkipList::insert(SkipListNode *x, SkipListNode *node, unsigned int currentH
     }
 }
 
-bool SkipList::contains(long key) {
+bool SkipList::contains(nodeKey key) {
     return find(key, head, CURRENT_HEIGHT) != nullptr;
 }
 
-SkipListNode *SkipList::find(long key, SkipListNode *node, int currentHeight) {
+SkipListNode *SkipList::find(nodeKey key, SkipListNode *node, int currentHeight) {
     if (currentHeight < 0) { return nullptr;}
     if (compareKey(node->key, key) == 0) { return node;}
     if (node->next[currentHeight] == nullptr
@@ -59,7 +59,7 @@ SkipListNode *SkipList::find(long key, SkipListNode *node, int currentHeight) {
     else { return find(key, node->next[currentHeight], currentHeight);}
 }
 
-bool SkipList::remove(long key) {
+bool SkipList::remove(nodeKey key) {
     SkipListNode *x = find(key, head, CURRENT_HEIGHT);
     if (x == nullptr) { return false;}
     remove(x, head, max(x->height, CURRENT_HEIGHT));
@@ -82,8 +82,8 @@ void SkipList::remove(SkipListNode *x, SkipListNode *node, int currentHeight) {
 
 
 
-long *SkipList::getOrderedList() {
-    long *list = (long *)malloc(sizeof(long) * size);
+nodeKey *SkipList::getOrderedList() {
+    nodeKey *list = (nodeKey *)malloc(sizeof(nodeKey) * size);
     SkipListNode *node = head;
     for (int i = 0; i < size; ++i) {
         node = node->next[0];
@@ -99,12 +99,12 @@ long SkipList::getSize() {
 
 
 void SkipList::print() {
-    long *bottomList = getOrderedList();
+    nodeKey *bottomList = getOrderedList();
     for (int i = CURRENT_HEIGHT; i >= 0; --i) {
         SkipListNode *node = head->next[i];
         for (int j = 0; j < size; ++j) {
-            if (node != nullptr && node->key == bottomList[j]) {
-                printf("%li\t", node->key);
+            if (node != nullptr && compareKey(node->key, bottomList[j]) == 0) {
+                printf(nodeKeyFormatSpecifier, node->key); printf("\t");
                 node = node->next[i];
             } else {
                 printf("\t");
