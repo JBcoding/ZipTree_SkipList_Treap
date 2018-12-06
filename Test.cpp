@@ -90,7 +90,7 @@ void containsRandom(OrderedList *list, long limit) {
 void containsSkewed(OrderedList *list, long limit) {
     long *container = (long*)malloc(sizeof(long) * limit);
     for (long i = 0; i < limit; i ++) {
-        container[i] = i;
+        container[i] = i + 1;
         list->insert(i);
     }
 
