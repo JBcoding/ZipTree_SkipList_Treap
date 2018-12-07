@@ -9,6 +9,7 @@
 #include "SkipList.h"
 #include "Treap.h"
 #include "ZipTreeBlockAllocator.h"
+#include "TreapBlockAllocator.h"
 
 #ifdef IMPORT_WORDS_AS_NUMBERS
 #include "LargeConstants/WordsAsNumbers.h"
@@ -33,6 +34,8 @@ OrderedList* getStructure(long type) {
         list = new Treap();
     } else if (type == 4) {
         list = new ZipTreeBlockAllocator();
+    } else if (type == 5) {
+        list = new TreapBlockAllocator();
     }
     return list;
 }

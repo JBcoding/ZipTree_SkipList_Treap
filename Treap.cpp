@@ -4,6 +4,11 @@
 
 #include "Treap.h"
 
+Treap::Treap() {
+    root = nullptr;
+    size = 0;
+}
+
 void Treap::insert(NODE_KEY value) {
     insert(value, randomPriority);
 }

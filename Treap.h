@@ -22,15 +22,18 @@ typedef struct TreapNode {
 
 class Treap: public OrderedList {
 public:
+    Treap();
+
     void insert(NODE_KEY value) override;
-    void insert(NODE_KEY value, unsigned int priority);
+    virtual void insert(NODE_KEY value, unsigned int priority);
     bool contains(NODE_KEY key) override;
     bool remove(NODE_KEY key) override;
 
     NODE_KEY* getOrderedList() override;
     long getSize() override;
     void print() override;
-private:
+
+protected:
     TreapNode *root;
     long size;
 
