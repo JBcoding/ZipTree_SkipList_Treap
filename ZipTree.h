@@ -20,21 +20,25 @@ typedef struct ZipTreeNode {
 
     ZipTreeNode *left;
     ZipTreeNode *right;
-} ZipTreeNode;
+} __attribute__ ((packed)) ZipTreeNode;
 
 class ZipTree: public OrderedList {
 public:
+    ZipTree();
+
     void insert(NODE_KEY value) override;
-    void insert(NODE_KEY value, uint8_t rank);
+
+    virtual void insert(NODE_KEY value, uint8_t rank);
     bool contains(NODE_KEY key) override;
     bool remove(NODE_KEY key) override;
 
     NODE_KEY* getOrderedList() override;
     long getSize() override;
     void print() override;
-private:
+
+protected:
     ZipTreeNode *root;
-    long size = 0;
+    long size;
 
     ZipTreeNode* insert(ZipTreeNode *x, ZipTreeNode *node);
     ZipTreeNode* find(NODE_KEY key, ZipTreeNode *node);

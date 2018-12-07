@@ -4,6 +4,11 @@
 
 #include "ZipTree.h"
 
+ZipTree::ZipTree() {
+    root = nullptr;
+    size = 0;
+}
+
 void ZipTree::insert(NODE_KEY value) {
     insert(value, randomRank);
 }

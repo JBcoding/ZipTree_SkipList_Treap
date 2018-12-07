@@ -8,12 +8,13 @@
 #include "ZipTree.h"
 #include "SkipList.h"
 #include "Treap.h"
+#include "ZipTreeBlockAllocator.h"
 
-#ifdef IMPORT_WORDS_AS_NUMBERS // enable by compiling with "-D IMPORT_WORDS_AS_NUMBERS"
+#ifdef IMPORT_WORDS_AS_NUMBERS
 #include "LargeConstants/WordsAsNumbers.h"
 #endif
 
-#ifdef IMPORT_WORDS // enable by compiling with "-D IMPORT_WORDS"
+#ifdef IMPORT_WORDS
 #include "LargeConstants/Words.h"
 #endif
 
@@ -28,8 +29,10 @@ OrderedList* getStructure(long type) {
         list = new ZipTree();
     } else if (type == 2) {
         list = new SkipList();
-    } else {
+    } else if (type == 3) {
         list = new Treap();
+    } else if (type == 4) {
+        list = new ZipTreeBlockAllocator();
     }
     return list;
 }
