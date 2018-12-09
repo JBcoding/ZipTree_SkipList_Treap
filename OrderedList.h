@@ -10,6 +10,7 @@
 #define COMPARATOR_LONG 1
 #define COMPARATOR_STRING 2
 #define COMPARATOR_LONG_COUNT 3
+#define COMPARATOR_STRING_COUNT 4
 
 #if COMPARATOR == COMPARATOR_LONG
 #define NODE_KEY long
@@ -38,6 +39,15 @@
 #define COMPARE_KEY(k1, k2) (k1 > k2) - (k1 < k2) + (++ comparisonsCounter - comparisonsCounter)
 #define IMPORT_WORDS_AS_NUMBERS
 #define LONG_TESTS
+#elif COMPARATOR == COMPARATOR_STRING_COUNT
+#define NODE_KEY const char *
+#define NODE_KEY_FORMAT_SPECIFIER "%s"
+#define SMALLEST_KEY_VALUE ""
+#define EXTRA_VARIABLES long comparisonsCounter = 0;
+#define FINAL_PRINT printf("%li\n", list->comparisonsCounter);
+#define COMPARE_KEY(k1, k2) strcmp(k1, k2) + (++ comparisonsCounter - comparisonsCounter)
+#define IMPORT_WORDS
+#define STRING_TESTS
 #endif
 
 

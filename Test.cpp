@@ -17,6 +17,7 @@
 
 #ifdef IMPORT_WORDS
 #include "LargeConstants/Words.h"
+#include "LargeConstants/Sentences.h"
 #endif
 
 
@@ -76,6 +77,12 @@ void insertWords(OrderedList *list, long limit) {
         list->insert(wordsArray[i % lengthOfWordsArray]);
     }
 }
+
+void insertSentences(OrderedList *list, long limit) {
+    for (long i = 0; i < limit; i ++) {
+        list->insert(sentencesArray[i % lengthOfSentencesArray]);
+    }
+}
 #endif
 
 #ifdef LONG_TESTS
@@ -103,7 +110,7 @@ void containsSkewed(OrderedList *list, long limit) {
     shuffle(container, limit);
 
     for (long i = 0; i < limit; i ++) {
-        list->contains(limit / container[i]);
+        list->contains(container[(limit - 1) / container[i]]);
     }
 }
 
@@ -136,6 +143,20 @@ void containsWords(OrderedList *list, long limit) {
         list->contains(wordsArray[i % lengthOfWordsArray]);
     }
 }
+
+void containsSentences(OrderedList *list, long limit) {
+    long *container = (long*)malloc(sizeof(long) * limit);
+    for (long i = 0; i < limit; i ++) {
+        container[i] = i;
+        list->insert(sentencesArray[i % lengthOfSentencesArray]);
+    }
+
+    shuffle(container, limit);
+
+    for (long i = 0; i < limit; i ++) {
+        list->contains(sentencesArray[i % lengthOfSentencesArray]);
+    }
+}
 #endif
 
 int main() {
@@ -163,21 +184,27 @@ int main() {
         case 4:
             insertWords(list, limit);
             break;
+        case 5:
+            insertSentences(list, limit);
+            break;
 #endif
 #ifdef LONG_TESTS
-        case 5:
+        case 6:
             containsRandom(list, limit);
             break;
-        case 6:
+        case 7:
             containsSkewed(list, limit);
             break;
-        case 7:
+        case 8:
             containsWordsAsNumbers(list, limit);
             break;
 #endif
 #ifdef STRING_TESTS
-        case 8:
+        case 9:
             containsWords(list, limit);
+            break;
+        case 10:
+            containsSentences(list, limit);
             break;
 #endif
         default:
