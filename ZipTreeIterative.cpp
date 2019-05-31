@@ -36,7 +36,7 @@ ZipTreeNode *ZipTreeIterative::insert(ZipTreeNode *x, ZipTreeNode *node) {
             do {
                 previous = current;
                 current = current->left;
-            } while (!(current != nullptr || COMPARE_KEY(current->key, x->key) < 0));
+            } while (!(current == nullptr || COMPARE_KEY(current->key, x->key) < 0));
         }
         if (COMPARE_KEY(fix->key, x->key) > 0 || (fix == x && COMPARE_KEY(previous->key, x->key) > 0)) {
             fix->left = current;
