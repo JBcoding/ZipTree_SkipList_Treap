@@ -8,7 +8,7 @@
 #include <stdexcept>
 #include "ZipTree.h"
 
-class ZipTreeBlockAllocator: public ZipTree {
+class ZipTreeBlockAllocator: virtual public ZipTree {
 public:
     ZipTreeBlockAllocator();
 

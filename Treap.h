@@ -37,7 +37,7 @@ protected:
     TreapNode *root;
     long size;
 
-    TreapNode* insert(TreapNode *x, TreapNode *node);
+    virtual TreapNode* insert(TreapNode *x, TreapNode *node);
     TreapNode* remove(TreapNode *x, TreapNode *node);
     TreapNode* removeLeaf(TreapNode *x, TreapNode *node);
     TreapNode* removeUnaryNode(TreapNode *x, TreapNode *node);

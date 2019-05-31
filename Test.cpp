@@ -10,6 +10,8 @@
 #include "Treap.h"
 #include "ZipTreeBlockAllocator.h"
 #include "TreapBlockAllocator.h"
+#include "ZipTreeIterative.h"
+#include "ZipTreeIterativeBlockAllocator.h"
 
 #ifdef IMPORT_WORDS_AS_NUMBERS
 #include "LargeConstants/WordsAsNumbers.h"
@@ -37,6 +39,10 @@ OrderedList* getStructure(long type) {
         list = new ZipTreeBlockAllocator();
     } else if (type == 5) {
         list = new TreapBlockAllocator();
+    } else if (type == 6) {
+        list = new ZipTreeIterative();
+    } else if (type == 7) {
+        list = new ZipTreeIterativeBlockAllocator();
     }
     return list;
 }

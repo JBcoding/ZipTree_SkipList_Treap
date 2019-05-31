@@ -40,8 +40,8 @@ protected:
     ZipTreeNode *root;
     long size;
 
-    ZipTreeNode* insert(ZipTreeNode *x, ZipTreeNode *node);
-    ZipTreeNode* find(NODE_KEY key, ZipTreeNode *node);
+    virtual ZipTreeNode* insert(ZipTreeNode *x, ZipTreeNode *node);
+    virtual ZipTreeNode* find(NODE_KEY key, ZipTreeNode *node);
     ZipTreeNode* remove(ZipTreeNode *x, ZipTreeNode *node);
     ZipTreeNode* zip(ZipTreeNode *x, ZipTreeNode *y);
 

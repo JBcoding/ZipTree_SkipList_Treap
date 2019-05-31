@@ -8,7 +8,7 @@
 #include <stdexcept>
 #include "Treap.h"
 
-class TreapBlockAllocator: public Treap {
+class TreapBlockAllocator: virtual public Treap {
 public:
     TreapBlockAllocator();
 
