@@ -6,8 +6,8 @@ mkdir results
 mkdir results/count
 mkdir results/noCount
 
-comparatorArray=(1 1 1 2 1 1 1 2)
-internalTest=(1 2 3 4 5 6 7 8)
+comparatorArray=(1 1 1 2 2 1 1 1 2 2)
+internalTest=(1 2 3 4 5 6 7 8 9 10)
 structures=(1 2 3 4 5 6 7)
 sizes=(65536 131072 262144 524288 1048576 2097152 4194304 8388608 16777216 33554432 67108864 134217728)
 
