@@ -10,6 +10,8 @@ ZipTree::ZipTree() {
 }
 
 void ZipTree::insert(NODE_KEY value) {
+    int randomRank;
+    randomRank(randomRank);
     insert(value, randomRank);
 }
 

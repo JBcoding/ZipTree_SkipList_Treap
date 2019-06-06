@@ -8,7 +8,10 @@ mkdir results/noCount
 
 comparatorArray=(1 1 1 2 2 1 1 1 2 2)
 internalTest=(1 2 3 4 5 6 7 8 9 10)
-structures=(1 2 3 4 5 6 7)
+
+randomRankArray=(0 0 0 0 0 0 0 1 2 3 4)
+structures=(1 2 3 4 5 6 7 7 7 7 7)
+
 sizes=(65536 131072 262144 524288 1048576 2097152 4194304 8388608 16777216 33554432 67108864 134217728)
 
 testCount=0
@@ -26,9 +29,10 @@ do
    countNice="With counting"
    countFolder="count"
   fi
-  g++ -std=c++17 -D COMPARATOR=$comparator *.cpp -o Test.out
-  for structure in "${structures[@]}" 
-   do
+  for ((j=0;j<${#structures[@]};++j)); do
+   structure=${structures[i]}
+   randomRank=${randomRankArray[i]}
+   g++ -std=c++17 -D COMPARATOR=${comparator} -D RANDOM_RANK=${randomRank} *.cpp -o Test.out
    for size in "${sizes[@]}" 
    do
     printf -v sizeNice "%09d" ${size}
@@ -37,8 +41,9 @@ do
     printf -v totalTestCountNice "%04d" ${totalTestCount}
     percentage="$(bc -l <<< "$testCount / $totalTestCount * 100")"
     printf -v percentageNice "%05.2f" ${percentage}
-    echo "Runnning test #$test on structure $structure with limit $sizeNice, $countNice, test $testCountNice out of $totalTestCountNice ($percentageNice%)"
-    echo "$test $structure $size" | /usr/bin/time -f "%E %P %M" ./Test.out 2>&1 | tee results/${countFolder}/${test}-${structure}-${sizeNice}.txt
+    structureNum=$((structure + randomRank))
+    echo "Runnning test #$test on structure $structureNum with limit $sizeNice, $countNice, test $testCountNice out of $totalTestCountNice ($percentageNice%)"
+    echo "$test $structure $size" | /usr/bin/time -f "%E %P %M" ./Test.out 2>&1 | tee results/${countFolder}/${test}-${structureNum}-${sizeNice}.txt
    done
   done
  done
