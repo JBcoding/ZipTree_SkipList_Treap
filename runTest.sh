@@ -30,8 +30,8 @@ do
    countFolder="count"
   fi
   for ((j=0;j<${#structures[@]};++j)); do
-   structure=${structures[i]}
-   randomRank=${randomRankArray[i]}
+   structure=${structures[j]}
+   randomRank=${randomRankArray[j]}
    g++ -std=c++17 -D COMPARATOR=${comparator} -D RANDOM_RANK=${randomRank} *.cpp -o Test.out
    for size in "${sizes[@]}" 
    do
