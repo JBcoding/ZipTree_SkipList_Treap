@@ -9,7 +9,7 @@
 #include "ZipTreeBlockAllocator.h"
 
 class ZipTreeIterativeBlockAllocator: public ZipTreeIterative, ZipTreeBlockAllocator {
-
+    ZipTreeNode* (ZipTreeIterative::*insertReference)(ZipTreeNode *, ZipTreeNode *) = &ZipTreeIterative::insert;
 };
 
 

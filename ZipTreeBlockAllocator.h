@@ -17,6 +17,9 @@ public:
     bool remove(NODE_KEY key) override { throw std::invalid_argument( "remove not implemented in BlockAllocator" ); }
 
 protected:
+
+    ZipTreeNode* (ZipTree::*insertReference)(ZipTreeNode *, ZipTreeNode *) = &ZipTree::insert;
+
     void *currentBlock;
     long currentBlockSize;
     long currentBlockIndex;

@@ -40,7 +40,6 @@ protected:
     TreapNode *root;
     long size;
 
-    virtual TreapNode* insert(TreapNode *x, TreapNode *node);
     TreapNode* remove(TreapNode *x, TreapNode *node);
     TreapNode* removeLeaf(TreapNode *x, TreapNode *node);
     TreapNode* removeUnaryNode(TreapNode *x, TreapNode *node);
@@ -50,6 +49,9 @@ protected:
     unsigned long getOrderedList(TreapNode *node, NODE_KEY* list, unsigned long index);
     virtual TreapNode* find(NODE_KEY key, TreapNode *node);
     void print(TreapNode *node, int depth);
+
+public: // for function pointer purpose
+    virtual TreapNode* insert(TreapNode *x, TreapNode *node);
 };
 
 

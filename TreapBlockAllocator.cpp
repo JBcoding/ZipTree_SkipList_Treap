@@ -21,6 +21,6 @@ void TreapBlockAllocator::insert(NODE_KEY value, unsigned int priority) {
     x->key = value;
     x->priority = priority;
     x->left = x->right = nullptr;
-    root = Treap::insert(x, root);
+    root = (this->*insertReference)(x, root);
     size ++;
 }

@@ -68,13 +68,15 @@ protected:
     ZipTreeNode *root;
     long size;
 
-    virtual ZipTreeNode* insert(ZipTreeNode *x, ZipTreeNode *node);
     virtual ZipTreeNode* find(NODE_KEY key, ZipTreeNode *node);
     ZipTreeNode* remove(ZipTreeNode *x, ZipTreeNode *node);
     ZipTreeNode* zip(ZipTreeNode *x, ZipTreeNode *y);
 
     unsigned long getOrderedList(ZipTreeNode *node, NODE_KEY* list, unsigned long index);
     void print(ZipTreeNode *node, int depth);
+
+public: // for function pointer purpose
+    virtual ZipTreeNode* insert(ZipTreeNode *x, ZipTreeNode *node);
 };
 
 

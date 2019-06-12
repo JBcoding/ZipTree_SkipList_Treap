@@ -21,7 +21,7 @@ void ZipTreeBlockAllocator::insert(NODE_KEY value, uint8_t rank) {
     x->key = value;
     x->rank = rank;
     x->left = x->right = nullptr;
-    root = ZipTree::insert(x, root);
+    root = (this->*insertReference)(x, root);
     size ++;
 }
 

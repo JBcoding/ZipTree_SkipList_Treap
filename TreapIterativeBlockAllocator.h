@@ -9,7 +9,7 @@
 #include "TreapBlockAllocator.h"
 
 class TreapIterativeBlockAllocator: public TreapIterative, TreapBlockAllocator {
-
+    TreapNode* (TreapIterative::*insertReference)(TreapNode *, TreapNode *) = &TreapIterative::insert;
 };
 
 

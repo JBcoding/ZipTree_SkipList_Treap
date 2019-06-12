@@ -9,8 +9,10 @@
 
 class TreapIterative: virtual public Treap {
 protected:
-    TreapNode* insert(TreapNode *x, TreapNode *node);
     TreapNode* find(NODE_KEY key, TreapNode *node);
+
+public: // for function pointer purpose
+    TreapNode* insert(TreapNode *x, TreapNode *node);
 };
 
 

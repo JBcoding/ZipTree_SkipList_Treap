@@ -16,6 +16,9 @@ public:
     bool remove(NODE_KEY key) override { throw std::invalid_argument( "remove not implemented in BlockAllocator" ); }
 
 protected:
+
+    TreapNode* (Treap::*insertReference)(TreapNode *, TreapNode *) = &Treap::insert;
+
     void *currentBlock;
     long currentBlockSize;
     long currentBlockIndex;

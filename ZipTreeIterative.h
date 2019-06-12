@@ -9,8 +9,10 @@
 
 class ZipTreeIterative: virtual public ZipTree {
 protected:
-    ZipTreeNode* insert(ZipTreeNode *x, ZipTreeNode *node);
     ZipTreeNode* find(NODE_KEY key, ZipTreeNode *node);
+
+public: // for function pointer purpose
+    ZipTreeNode* insert(ZipTreeNode *x, ZipTreeNode *node);
 };
 
 
