@@ -71,7 +71,7 @@ TreapNode *TreapIterative::find(NODE_KEY key, TreapNode *node) {
 
 #else
 
-TreapNode *TreapIterative::insert(TreapNode *x, TreapNode *node) {}
-TreapNode *TreapIterative::find(NODE_KEY key, TreapNode *node) {}
+TreapNode *TreapIterative::insert(TreapNode *x, TreapNode *node) {return nullptr;}
+TreapNode *TreapIterative::find(NODE_KEY key, TreapNode *node) {return nullptr;}
 
 #endif
