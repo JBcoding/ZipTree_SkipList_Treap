@@ -4,6 +4,8 @@
 
 #include "TreapIterative.h"
 
+#ifdef TREAP_ITERATIVE
+
 TreapNode *TreapIterative::insert(TreapNode *x, TreapNode *node) {
     if (node == nullptr) {
         return x;
@@ -66,3 +68,10 @@ TreapNode *TreapIterative::find(NODE_KEY key, TreapNode *node) {
     }
     return nullptr;
 }
+
+#else
+
+TreapNode *TreapIterative::insert(TreapNode *x, TreapNode *node) {}
+TreapNode *TreapIterative::find(NODE_KEY key, TreapNode *node) {}
+
+#endif
