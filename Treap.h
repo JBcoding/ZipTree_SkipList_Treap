@@ -16,6 +16,9 @@ typedef struct TreapNode {
     NODE_KEY key;
     unsigned int priority;
 
+#ifdef TREAP_ITERATIVE
+    TreapNode *parent;
+#endif
     TreapNode *left;
     TreapNode *right;
 } TreapNode;
@@ -45,7 +48,7 @@ protected:
     TreapNode* successorOfNodeWithARightChild(TreapNode *x);
 
     unsigned long getOrderedList(TreapNode *node, NODE_KEY* list, unsigned long index);
-    TreapNode* find(NODE_KEY key, TreapNode *node);
+    virtual TreapNode* find(NODE_KEY key, TreapNode *node);
     void print(TreapNode *node, int depth);
 };
 

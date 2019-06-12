@@ -9,8 +9,9 @@ mkdir results/noCount
 comparatorArray=(1 1 1 2 2 1 1 1 2 2)
 internalTest=(1 2 3 4 5 6 7 8 9 10)
 
-randomRankArray=(0 0 0 0 0 0 0 1 2 3 4 5 6 7 8)
-structures=(1 2 3 4 5 6 7 7 7 7 7 7 7 7 7)
+randomRankArray=(0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8)
+treapIterativeArray=(0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0)
+structures=(1 2 3 4 5 6 7 8 9 9 9 9 9 9 9 9 9 9)
 
 sizes=(65536 131072 262144 524288 1048576 2097152 4194304 8388608 16777216 33554432 67108864 134217728)
 
@@ -25,14 +26,20 @@ do
   countNice="Not counting"
   countFolder="noCount"
   if [ $count == '1' ]; then
-   comparator=3
+   comparator=$((comparator+2))
    countNice="With counting"
    countFolder="count"
   fi
   for ((j=0;j<${#structures[@]};++j)); do
    structure=${structures[j]}
    randomRank=${randomRankArray[j]}
-   g++ -std=c++17 -D COMPARATOR=${comparator} -D RANDOM_RANK=${randomRank} *.cpp -o Test.out
+   treapIterative=${treapIterativeArray[j]}
+   if [ $treapIterative == '1' ]; then
+    g++ -std=c++17 -D COMPARATOR=${comparator} -D RANDOM_RANK=${randomRank} -D TREAP_ITERATIVE *.cpp -o Test.out
+   else
+    g++ -std=c++17 -D COMPARATOR=${comparator} -D RANDOM_RANK=${randomRank} *.cpp -o Test.out
+   fi
+
    for size in "${sizes[@]}" 
    do
     printf -v sizeNice "%09d" ${size}

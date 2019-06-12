@@ -17,7 +17,11 @@ void Treap::insert(NODE_KEY value, unsigned int priority) {
     auto *x = (TreapNode*)malloc(sizeof(TreapNode));
     x->key = value;
     x->priority = priority;
+#ifdef TREAP_ITERATIVE
+    x->left = x->right = x->parent = nullptr;
+#else
     x->left = x->right = nullptr;
+#endif
     root = insert(x, root);
     size ++;
 }

@@ -3,6 +3,8 @@
 //
 
 #include <iostream>
+#include <time.h>
+
 
 #include "OrderedList.h"
 #include "ZipTree.h"
@@ -11,6 +13,8 @@
 #include "ZipTreeBlockAllocator.h"
 #include "TreapBlockAllocator.h"
 #include "ZipTreeIterative.h"
+#include "TreapIterative.h"
+#include "TreapIterativeBlockAllocator.h"
 #include "ZipTreeIterativeBlockAllocator.h"
 
 #ifdef IMPORT_WORDS_AS_NUMBERS
@@ -27,7 +31,7 @@
 
 // Helper functions
 
-OrderedList* getStructure(long type) {
+OrderedList* getStructure(long type, int limit) {
     OrderedList *list;
     if (type == 1) {
         list = new ZipTree();
@@ -42,6 +46,10 @@ OrderedList* getStructure(long type) {
     } else if (type == 6) {
         list = new ZipTreeIterative();
     } else if (type == 7) {
+        list = new TreapIterative();
+    } else if (type == 8) {
+        list = new TreapIterativeBlockAllocator();
+    } else if (type == 9) {
         list = new ZipTreeIterativeBlockAllocator();
     }
     return list;
@@ -168,11 +176,21 @@ void containsSentences(OrderedList *list, long limit) {
 int main() {
     srand(0x2A); rand(); rand(); rand(); // to get it going :)
 
+    /*int y = 0;
+    clock_t t = clock();
+    for (int i = 0; i < 100000000; i ++) {
+        randomRank(y);
+    }
+    t = clock() - t;
+    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    printf("%lf\n", time_taken);
+    return 0;
+*/
 
     long testType, testDataStructure, limit;
     scanf("%ld %ld %ld", &testType, &testDataStructure, &limit);
 
-    OrderedList *list = getStructure(testDataStructure);
+    OrderedList *list = getStructure(testDataStructure, limit);
 
     switch (testType) {
 #ifdef LONG_TESTS
