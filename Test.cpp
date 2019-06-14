@@ -71,37 +71,47 @@ void shuffle(long *list, long size) {
 // Tests
 #ifdef LONG_TESTS
 void insertMonotonicallyIncreasing(OrderedList *list, long limit) {
+    START_TEST
     for (long i = 0; i < limit; i ++) {
         list->insert(i);
     }
+    END_TEST
 }
 
 void insertZigzag(OrderedList *list, long limit) {
+    START_TEST
     list->insert(0);
     for (long i = 1; i < limit / 2; i ++) {
         list->insert(i);
         list->insert(-i);
     }
+    END_TEST
 }
 
 void insertWordsAsNumbers(OrderedList *list, long limit) {
+    START_TEST
     for (long i = 0; i < limit; i ++) {
         list->insert(wordsAsNumbersArray[i % lengthOfWordsAsNumbersArray]);
     }
+    END_TEST
 }
 #endif
 
 #ifdef STRING_TESTS
 void insertWords(OrderedList *list, long limit) {
+    START_TEST
     for (long i = 0; i < limit; i ++) {
         list->insert(wordsArray[i % lengthOfWordsArray]);
     }
+    END_TEST
 }
 
 void insertSentences(OrderedList *list, long limit) {
+    START_TEST
     for (long i = 0; i < limit; i ++) {
         list->insert(sentencesArray[i % lengthOfSentencesArray]);
     }
+    END_TEST
 }
 #endif
 
@@ -115,9 +125,11 @@ void containsRandom(OrderedList *list, long limit) {
 
     shuffle(container, limit);
 
+    START_TEST
     for (long i = 0; i < limit; i ++) {
         list->contains(container[i]);
     }
+    END_TEST
 }
 
 void containsSkewed(OrderedList *list, long limit) {
@@ -129,9 +141,11 @@ void containsSkewed(OrderedList *list, long limit) {
 
     shuffle(container, limit);
 
+    START_TEST
     for (long i = 0; i < limit; i ++) {
         list->contains(container[(limit - 1) / container[i]]);
     }
+    END_TEST
 }
 
 void containsWordsAsNumbers(OrderedList *list, long limit) {
@@ -143,9 +157,11 @@ void containsWordsAsNumbers(OrderedList *list, long limit) {
 
     shuffle(container, limit);
 
+    START_TEST
     for (long i = 0; i < limit; i ++) {
         list->contains(wordsAsNumbersArray[i % lengthOfWordsAsNumbersArray]);
     }
+    END_TEST
 }
 #endif
 
@@ -159,9 +175,11 @@ void containsWords(OrderedList *list, long limit) {
 
     shuffle(container, limit);
 
+    START_TEST
     for (long i = 0; i < limit; i ++) {
         list->contains(wordsArray[i % lengthOfWordsArray]);
     }
+    END_TEST
 }
 
 void containsSentences(OrderedList *list, long limit) {
@@ -173,9 +191,11 @@ void containsSentences(OrderedList *list, long limit) {
 
     shuffle(container, limit);
 
+    START_TEST
     for (long i = 0; i < limit; i ++) {
         list->contains(sentencesArray[i % lengthOfSentencesArray]);
     }
+    END_TEST
 }
 #endif
 
@@ -241,5 +261,4 @@ int main() {
             printf("Test not found, make sure you have compiled with the correct flags");
     }
 
-    FINAL_PRINT
 }

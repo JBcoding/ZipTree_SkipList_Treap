@@ -17,7 +17,8 @@
 #define NODE_KEY_FORMAT_SPECIFIER "%li"
 #define SMALLEST_KEY_VALUE std::numeric_limits<long>::min()
 #define EXTRA_VARIABLES ;
-#define FINAL_PRINT ;
+#define START_TEST clock_t t = clock();
+#define END_TEST t = clock() - t; double time_taken = ((double)t)/CLOCKS_PER_SEC; printf("%lf\n", time_taken);
 #define COMPARE_KEY(k1, k2) (k1 > k2) - (k1 < k2)
 #define IMPORT_WORDS_AS_NUMBERS
 #define LONG_TESTS
@@ -26,7 +27,8 @@
 #define NODE_KEY_FORMAT_SPECIFIER "%s"
 #define SMALLEST_KEY_VALUE ""
 #define EXTRA_VARIABLES ;
-#define FINAL_PRINT ;
+#define START_TEST clock_t t = clock();
+#define END_TEST t = clock() - t; double time_taken = ((double)t)/CLOCKS_PER_SEC; printf("%lf\n", time_taken);
 #define COMPARE_KEY(k1, k2) strcmp(k1, k2)
 #define IMPORT_WORDS
 #define STRING_TESTS
@@ -35,6 +37,8 @@
 #define NODE_KEY_FORMAT_SPECIFIER "%li"
 #define SMALLEST_KEY_VALUE std::numeric_limits<long>::min()
 #define EXTRA_VARIABLES long comparisonsCounter = 0;
+#define START_TEST list->comparisonsCounter = 0;
+#define END_TEST printf("%li\n", list->comparisonsCounter);
 #define FINAL_PRINT printf("%li\n", list->comparisonsCounter);
 #define COMPARE_KEY(k1, k2) (k1 > k2) - (k1 < k2) + (++ comparisonsCounter - comparisonsCounter)
 #define IMPORT_WORDS_AS_NUMBERS
@@ -44,7 +48,8 @@
 #define NODE_KEY_FORMAT_SPECIFIER "%s"
 #define SMALLEST_KEY_VALUE ""
 #define EXTRA_VARIABLES long comparisonsCounter = 0;
-#define FINAL_PRINT printf("%li\n", list->comparisonsCounter);
+#define START_TEST list->comparisonsCounter = 0;
+#define END_TEST printf("%li\n", list->comparisonsCounter);
 #define COMPARE_KEY(k1, k2) strcmp(k1, k2) + (++ comparisonsCounter - comparisonsCounter)
 #define IMPORT_WORDS
 #define STRING_TESTS
