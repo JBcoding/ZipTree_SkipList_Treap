@@ -19,7 +19,11 @@ void ZipTree::insert(NODE_KEY value, uint8_t rank) {
     auto *x = (ZipTreeNode*)malloc(sizeof(ZipTreeNode));
     x->key = value;
     x->rank = rank;
+#ifdef ZIP_TREE_PARENT
+    x->left = x->right = x->parent = nullptr;
+#else
     x->left = x->right = nullptr;
+#endif
     root = insert(x, root);
     size ++;
 }

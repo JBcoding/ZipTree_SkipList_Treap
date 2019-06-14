@@ -14,8 +14,10 @@
 #include "TreapBlockAllocator.h"
 #include "ZipTreeIterative.h"
 #include "TreapIterative.h"
-#include "TreapIterativeBlockAllocator.h"
 #include "ZipTreeIterativeBlockAllocator.h"
+#include "TreapIterativeBlockAllocator.h"
+#include "ZipTreeIterativeBlockAllocatorFrequentlyAccessed.h"
+#include "TreapIterativeBlockAllocatorFrequentlyAccessed.h"
 
 #ifdef IMPORT_WORDS_AS_NUMBERS
 #include "LargeConstants/WordsAsNumbers.h"
@@ -34,23 +36,27 @@
 OrderedList* getStructure(long type, int limit) {
     OrderedList *list;
     if (type == 1) {
-        list = new ZipTree();
-    } else if (type == 2) {
         list = new SkipList();
-    } else if (type == 3) {
+    } else if (type == 2) {
         list = new Treap();
-    } else if (type == 4) {
-        list = new ZipTreeBlockAllocator();
-    } else if (type == 5) {
+    } else if (type == 3) {
         list = new TreapBlockAllocator();
-    } else if (type == 6) {
-        list = new ZipTreeIterative();
-    } else if (type == 7) {
+    } else if (type == 4) {
         list = new TreapIterative();
-    } else if (type == 8) {
+    } else if (type == 5) {
         list = new TreapIterativeBlockAllocator();
+    } else if (type == 6) {
+        list = new TreapIterativeBlockAllocatorFrequentlyAccessed();
+    } else if (type == 7) {
+        list = new ZipTree();
+    } else if (type == 8) {
+        list = new ZipTreeBlockAllocator();
     } else if (type == 9) {
+        list = new ZipTreeIterative();
+    } else if (type == 10) {
         list = new ZipTreeIterativeBlockAllocator();
+    } else if (type == 11) {
+        list = new ZipTreeIterativeBlockAllocatorFrequentlyAccessed();
     }
     return list;
 }

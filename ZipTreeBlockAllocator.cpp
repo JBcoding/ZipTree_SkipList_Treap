@@ -20,7 +20,11 @@ void ZipTreeBlockAllocator::insert(NODE_KEY value, uint8_t rank) {
     auto *x = (ZipTreeNode *)((char*)currentBlock + sizeof(ZipTreeNode) * currentBlockIndex ++);
     x->key = value;
     x->rank = rank;
+#ifdef ZIP_TREE_PARENT
+    x->left = x->right = x->parent = nullptr;
+#else
     x->left = x->right = nullptr;
+#endif
     root = (this->*insertReference)(x, root);
     size ++;
 }

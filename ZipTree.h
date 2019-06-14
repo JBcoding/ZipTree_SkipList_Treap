@@ -46,6 +46,9 @@ typedef struct ZipTreeNode {
     NODE_KEY key;
     uint8_t rank;
 
+#ifdef ZIP_TREE_PARENT
+    ZipTreeNode *parent;
+#endif
     ZipTreeNode *left;
     ZipTreeNode *right;
 } __attribute__ ((packed)) ZipTreeNode;

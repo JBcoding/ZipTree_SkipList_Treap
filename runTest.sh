@@ -9,9 +9,10 @@ mkdir results/noCount
 comparatorArray=(1 1 1 2 2 1 1 1 2 2)
 internalTest=(1 2 3 4 5 6 7 8 9 10)
 
-randomRankArray=(0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8)
-treapIterativeArray=(0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0)
-structures=(1 2 3 4 5 6 7 8 9 9 9 9 9 9 9 9 9 9)
+randomRankArray=(0 0 0 0 0 0 0 0 0 0 0 1 2 3 4 5 6 7 8)
+treapIterativeArray=(0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0)
+zipTreeParentArray=(0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1)
+structures=(1 2 3 4 5 6 7 8 9 10 11 11 11 11 11 11 11 11 11)
 
 sizes=(65536 131072 262144 524288 1048576 2097152 4194304 8388608 16777216 33554432 67108864 134217728)
 
@@ -34,12 +35,16 @@ do
    structure=${structures[j]}
    randomRank=${randomRankArray[j]}
    treapIterative=${treapIterativeArray[j]}
+   zipTreeParent=${zipTreeParentArray[j]}
+   treapIterativeString=""
+   zipTreeParentString=""
    if [ $treapIterative == '1' ]; then
-    g++ -std=c++17 -D COMPARATOR=${comparator} -D RANDOM_RANK=${randomRank} -D TREAP_ITERATIVE *.cpp -o Test.out
-   else
-    g++ -std=c++17 -D COMPARATOR=${comparator} -D RANDOM_RANK=${randomRank} *.cpp -o Test.out
+    treapIterativeString=" -D TREAP_ITERATIVE"
    fi
-
+   if [ zipTreeParent == '1' ]; then
+    zipTreeParentString=" -D ZIP_TREE_PARENT"
+   fi
+   g++ -std=c++17 -D COMPARATOR=${comparator} -D RANDOM_RANK=${randomRank}${treapIterativeString}${zipTreeParentString} *.cpp -o Test.out
    for size in "${sizes[@]}" 
    do
     printf -v sizeNice "%09d" ${size}
