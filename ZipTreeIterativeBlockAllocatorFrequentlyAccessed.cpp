@@ -56,4 +56,8 @@ ZipTreeNode *ZipTreeIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key
     return node;
 }
 
+#else
+
+ZipTreeNode *ZipTreeIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key, ZipTreeNode *node) {return nullptr;}
+
 #endif

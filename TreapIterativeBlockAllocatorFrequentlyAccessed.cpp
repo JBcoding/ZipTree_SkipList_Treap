@@ -52,4 +52,8 @@ TreapNode *TreapIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key, Tr
     return node;
 }
 
+#else
+
+TreapNode *TreapIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key, TreapNode *node) {return nullptr;}
+
 #endif
