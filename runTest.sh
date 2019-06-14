@@ -41,7 +41,7 @@ do
    if [ $treapIterative == '1' ]; then
     treapIterativeString=" -D TREAP_ITERATIVE"
    fi
-   if [ zipTreeParent == '1' ]; then
+   if [ $zipTreeParent == '1' ]; then
     zipTreeParentString=" -D ZIP_TREE_PARENT"
    fi
    g++ -std=c++17 -D COMPARATOR=${comparator} -D RANDOM_RANK=${randomRank}${treapIterativeString}${zipTreeParentString} *.cpp -o Test.out
