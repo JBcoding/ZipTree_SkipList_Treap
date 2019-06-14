@@ -4,6 +4,8 @@
 
 #include "ZipTreeIterativeBlockAllocatorFrequentlyAccessed.h"
 
+#ifdef ZIP_TREE_PARENT
+
 ZipTreeNode *ZipTreeIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key, ZipTreeNode *node) {
     ZipTreeNode *previous = nullptr;
     while (node != nullptr) {
@@ -53,3 +55,5 @@ ZipTreeNode *ZipTreeIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key
     }
     return node;
 }
+
+#endif

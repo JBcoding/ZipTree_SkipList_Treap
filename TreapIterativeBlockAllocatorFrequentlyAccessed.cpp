@@ -4,6 +4,8 @@
 
 #include "TreapIterativeBlockAllocatorFrequentlyAccessed.h"
 
+#ifdef TREAP_ITERATIVE
+
 TreapNode *TreapIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key, TreapNode *node) {
     while (node != nullptr) {
         if (COMPARE_KEY(node->key, key) == 0) {
@@ -49,3 +51,5 @@ TreapNode *TreapIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key, Tr
     }
     return node;
 }
+
+#endif
