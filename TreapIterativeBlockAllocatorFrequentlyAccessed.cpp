@@ -7,10 +7,13 @@
 #ifdef TREAP_ITERATIVE
 
 TreapNode *TreapIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key, TreapNode *node) {
+    TreapNode *previous = nullptr;
     while (node != nullptr) {
+        node->parent = previous;
         if (COMPARE_KEY(node->key, key) == 0) {
             break;
         }
+        previous = node;
         node = COMPARE_KEY(key, node->key) < 0 ? node->left : node->right;
     }
     if (node == nullptr) {

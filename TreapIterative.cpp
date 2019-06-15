@@ -11,9 +11,10 @@ TreapNode *TreapIterative::insert(TreapNode *x, TreapNode *node) {
         return x;
     }
 
-    TreapNode *previous;
+    TreapNode *previous = nullptr;
     TreapNode *current = node;
     while (current != nullptr) {
+        current->parent = previous;
         previous = current;
         current = COMPARE_KEY(x->key, current->key) < 0 ? current->left : current->right;
     }
