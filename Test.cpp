@@ -89,9 +89,11 @@ void insertZigzag(OrderedList *list, long limit) {
 }
 
 void insertWordsAsNumbers(OrderedList *list, long limit) {
+    long *container = getWordsAsNumbers(limit);
+
     START_TEST
     for (long i = 0; i < limit; i ++) {
-        list->insert(wordsAsNumbersArray[i % lengthOfWordsAsNumbersArray]);
+        list->insert(container[i]);
     }
     END_TEST
 }
@@ -99,17 +101,21 @@ void insertWordsAsNumbers(OrderedList *list, long limit) {
 
 #ifdef STRING_TESTS
 void insertWords(OrderedList *list, long limit) {
+    char **words = getWords(limit);
+
     START_TEST
     for (long i = 0; i < limit; i ++) {
-        list->insert(wordsArray[i % lengthOfWordsArray]);
+        list->insert(words[i]);
     }
     END_TEST
 }
 
 void insertSentences(OrderedList *list, long limit) {
+    char **sentences = getSentences(limit);
+
     START_TEST
     for (long i = 0; i < limit; i ++) {
-        list->insert(sentencesArray[i % lengthOfSentencesArray]);
+        list->insert(sentences[i]);
     }
     END_TEST
 }
@@ -149,17 +155,18 @@ void containsSkewed(OrderedList *list, long limit) {
 }
 
 void containsWordsAsNumbers(OrderedList *list, long limit) {
-    long *container = (long*)malloc(sizeof(long) * limit);
+    long *container = getWordsAsNumbers(limit);
+
     for (long i = 0; i < limit; i ++) {
         container[i] = i;
-        list->insert(wordsAsNumbersArray[i % lengthOfWordsAsNumbersArray]);
+        list->insert(container[i]);
     }
 
     shuffle(container, limit);
 
     START_TEST
     for (long i = 0; i < limit; i ++) {
-        list->contains(wordsAsNumbersArray[i % lengthOfWordsAsNumbersArray]);
+        list->contains(container[i]);
     }
     END_TEST
 }
@@ -167,33 +174,35 @@ void containsWordsAsNumbers(OrderedList *list, long limit) {
 
 #ifdef STRING_TESTS
 void containsWords(OrderedList *list, long limit) {
+    char **words = getWords(limit);
     long *container = (long*)malloc(sizeof(long) * limit);
     for (long i = 0; i < limit; i ++) {
         container[i] = i;
-        list->insert(wordsArray[i % lengthOfWordsArray]);
+        list->insert(words[i]);
     }
 
     shuffle(container, limit);
 
     START_TEST
     for (long i = 0; i < limit; i ++) {
-        list->contains(wordsArray[i % lengthOfWordsArray]);
+        list->contains(words[container[i]]);
     }
     END_TEST
 }
 
 void containsSentences(OrderedList *list, long limit) {
+    char **sentences = getSentences(limit);
     long *container = (long*)malloc(sizeof(long) * limit);
     for (long i = 0; i < limit; i ++) {
         container[i] = i;
-        list->insert(sentencesArray[i % lengthOfSentencesArray]);
+        list->insert(sentences[i]);
     }
 
     shuffle(container, limit);
 
     START_TEST
     for (long i = 0; i < limit; i ++) {
-        list->contains(sentencesArray[i % lengthOfSentencesArray]);
+        list->contains(sentences[container[i]]);
     }
     END_TEST
 }
