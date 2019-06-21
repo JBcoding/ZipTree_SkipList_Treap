@@ -23,6 +23,7 @@ TreapNode *TreapIterativeBlockAllocatorFrequentlyAccessed::find(NODE_KEY key, Tr
     if (newPriority <= node->priority) {
         return node;
     }
+    node->priority = newPriority;
 
     while (node->parent != nullptr && node->parent->priority < node->priority) {
         TreapNode *parent = node->parent;
